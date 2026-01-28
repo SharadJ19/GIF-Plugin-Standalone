@@ -1,27 +1,96 @@
-# GifPluginStandalone
+# GIF Aggregator 🎞️
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+A simple Angular application that aggregates GIFs from multiple providers (GIPHY and KLIPY) into a single unified interface.  
+Users can search, view trending GIFs, switch providers, and download GIFs locally.
 
-## Development server
+This project demonstrates clean architecture, provider-based extensibility, and real-world Angular service design.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- 🔍 Search GIFs across providers
+- 📈 View trending GIFs
+- 🔄 Switch between providers (GIPHY / KLIPY)
+- ⬇️ Download original GIFs
+- ♻️ Load more with pagination
+- 🎨 Responsive UI using Angular Material
+- 🧩 Extensible provider architecture
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Screenshots
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+| Trending Results | Search Results |
+|------------------|----------------|
+| ![Trending Results](screenshots/trending.png) | ![Search Results](screenshots/search.png) |
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Architecture Overview
 
-## Running end-to-end tests
+```plaintext
+components/
+├── gif-card            → display + download UI
+├── provider-selector   → provider switching
+└── loading-spinner     → reusable loading UI
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+core/
+├── models              → domain + api models
+├── services
+│     ├── providers     → GIPHY / KLIPY implementations
+│     ├── gif-aggregator.service.ts
+│     └── download.service.ts
+pages/
+└── home                → page-level state & orchestration
+```
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Provider Strategy (Key Design)
+
+Each provider implements a common interface:
+
+```ts
+interface GifProvider {
+  search(query: string, limit: number, offset: number): Observable<GifApiResponse>;
+  getTrending(limit: number, offset: number): Observable<GifApiResponse>;
+}
+```
+
+The **GifAggregatorService** handles:
+
+* Provider registration
+* Active provider switching
+* Unified search/trending API
+
+This makes adding new providers easy (Tenor, Imgur, etc.) without changing UI logic.
+
+
+## How to Add a New Provider
+
+1. Implement `GifProvider`
+2. Register it in `AppComponent`
+3. Done — UI auto-supports it
+
+
+## Tech Stack
+
+* Angular
+* TypeScript
+* RxJS
+* Angular Material
+* GIPHY API
+* KLIPY API
+
+
+## Getting Started
+
+```bash
+npm install
+ng serve
+```
+
+Open: `http://localhost:4200`
+
+
+## Author
+
+Sharad Chandel
+R&D Intern
+(Shared with mentor for review & feedback)
