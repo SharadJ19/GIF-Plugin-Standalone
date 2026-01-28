@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+/* src\styles.css */
+
+/* Import Material Icons */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff9100;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e68200;
+}
+
+/* Button Reset */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Image Styles */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
